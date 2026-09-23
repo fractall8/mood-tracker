@@ -6,15 +6,71 @@
     <title>Трекер настрою</title>
   </head>
   <body>
-    <!-- header will be here - шапка з назвою;  -->
+    <header><h1>Трекер настрою</h1></header>
 
-    <!-- form - форма відмітки поточного настрою;  -->
+    <main>
+      <section>
+        <h2>Відмітити настрій</h2>
 
-    <!-- section for блок історії записів за датами;  -->
+        <form>
+          <label for="mood-date">Дата</label>
+          <input type="date" id="mood-date" name="date" required />
 
-    <!-- section for блок простої статистики; -->
+          <label for="mood-level">Настрій</label>
+          <select id="mood-level" name="mood" required>
+            <option value="">Оберіть настрій</option>
+            <option value="great">Чудовий</option>
+            <option value="good">Добрий</option>
+            <option value="neutral">Нейтральний</option>
+            <option value="bad">Поганий</option>
+            <option value="awful">Жахливий</option>
+          </select>
 
-    <!-- and footer) - підвал. -->
+          <label for="mood-note">Коментар</label>
+          <textarea id="mood-note" name="note" rows="3"></textarea>
+
+          <button type="submit">Зберегти запис</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Історія записів</h2>
+
+        <article>
+          <h3><time datetime="2026-09-15">15 вересня 2026</time></h3>
+          <p>Настрій: чудовий</p>
+          <p>Крутий день.</p>
+        </article>
+
+        <article>
+          <h3><time datetime="2026-09-14">14 вересня 2026</time></h3>
+          <p>Настрій: нейтральний</p>
+          <p>Спокійний день без особливих подій.</p>
+        </article>
+
+        <article>
+          <h3><time datetime="2026-09-13">13 вересня 2026</time></h3>
+          <p>Настрій: поганий</p>
+          <p>Багато завдань і мало сну.</p>
+        </article>
+      </section>
+    </main>
+
+    <aside>
+      <h2>Короткий підсумок</h2>
+      <p>Усього записів: 3</p>
+      <ul>
+        <li>Чудовий настрій: 1 день</li>
+        <li>Нейтральний настрій: 1 день</li>
+        <li>Поганий настрій: 1 день</li>
+      </ul>
+      <p>Останній запис: <time datetime="2026-09-15">15 вересня 2026</time></p>
+    </aside>
+
+    <footer>
+      <p>Трекер настрою</p>
+      <p>Проєкт для відстеження настрою</p>
+    </footer>
     <script src="js/app.js"></script>
   </body>
 </html>
