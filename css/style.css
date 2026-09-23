@@ -1,0 +1,102 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+:root {
+  --lavender: #e6e0f8;
+  --mint: #dcf2e6;
+  --peach: #fde4d3;
+  --ink: #4a3f6b;
+  --border: #cfc4ea;
+  --muted: #7b7194;
+}
+
+header {
+  background: linear-gradient(
+    135deg,
+    var(--lavender),
+    var(--mint) 55%,
+    var(--peach)
+  );
+  padding: 32px 24px;
+  border-bottom: 2px solid var(--border);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--ink);
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+main section + section {
+  margin-top: 40px;
+}
+
+.card {
+  background-color: var(--mint);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(74, 63, 107, 0.08);
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.card p {
+  margin: 0 0 6px;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+aside {
+  max-width: 720px;
+  margin: 0 auto 32px;
+  padding: 20px 24px;
+  background-color: var(--lavender);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  text-align: center;
+}
+
+aside h2 {
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+aside ul {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+footer {
+  padding: 24px;
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+footer p {
+  margin: 0 0 4px;
+}
