@@ -6,6 +6,11 @@
 
 body {
   margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--page);
 }
 
 :root {
@@ -15,6 +20,8 @@ body {
   --ink: #4a3f6b;
   --border: #cfc4ea;
   --muted: #7b7194;
+  --text: #3d3557;
+  --page: #faf8fd;
 }
 
 header {
