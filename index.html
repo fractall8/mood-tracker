@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Трекер настрою</title>
   </head>
   <body>
@@ -12,7 +13,7 @@
       <section>
         <h2>Відмітити настрій</h2>
 
-        <form>
+        <form class="mood-form">
           <label for="mood-date">Дата</label>
           <input type="date" id="mood-date" name="date" required />
 
@@ -36,19 +37,19 @@
       <section>
         <h2>Історія записів</h2>
 
-        <article>
+        <article class="card">
           <h3><time datetime="2026-09-15">15 вересня 2026</time></h3>
           <p>Настрій: чудовий</p>
           <p>Крутий день.</p>
         </article>
 
-        <article>
+        <article class="card">
           <h3><time datetime="2026-09-14">14 вересня 2026</time></h3>
           <p>Настрій: нейтральний</p>
           <p>Спокійний день без особливих подій.</p>
         </article>
 
-        <article>
+        <article class="card">
           <h3><time datetime="2026-09-13">13 вересня 2026</time></h3>
           <p>Настрій: поганий</p>
           <p>Багато завдань і мало сну.</p>
