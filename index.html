@@ -7,66 +7,73 @@
     <title>Трекер настрою</title>
   </head>
   <body>
-    <header><h1>Трекер настрою</h1></header>
+    <header class="site-header">
+      <span class="logo" aria-hidden="true">🙂</span>
+      <h1>Трекер настрою</h1>
+    </header>
 
-    <main>
-      <section>
-        <h2>Відмітити настрій</h2>
+    <div class="layout">
+      <main>
+        <section>
+          <h2>Відмітити настрій</h2>
 
-        <form class="mood-form">
-          <label for="mood-date">Дата</label>
-          <input type="date" id="mood-date" name="date" required />
+          <form class="mood-form">
+            <label for="mood-date">Дата</label>
+            <input type="date" id="mood-date" name="date" required />
 
-          <label for="mood-level">Настрій</label>
-          <select id="mood-level" name="mood" required>
-            <option value="">Оберіть настрій</option>
-            <option value="great">Чудовий</option>
-            <option value="good">Добрий</option>
-            <option value="neutral">Нейтральний</option>
-            <option value="bad">Поганий</option>
-            <option value="awful">Жахливий</option>
-          </select>
+            <label for="mood-level">Настрій</label>
+            <select id="mood-level" name="mood" required>
+              <option value="">Оберіть настрій</option>
+              <option value="great">Чудовий</option>
+              <option value="good">Добрий</option>
+              <option value="neutral">Нейтральний</option>
+              <option value="bad">Поганий</option>
+              <option value="awful">Жахливий</option>
+            </select>
 
-          <label for="mood-note">Коментар</label>
-          <textarea id="mood-note" name="note" rows="3"></textarea>
+            <label for="mood-note">Коментар</label>
+            <textarea id="mood-note" name="note" rows="3"></textarea>
 
-          <button type="submit">Зберегти запис</button>
-        </form>
-      </section>
+            <button type="submit">Зберегти запис</button>
+          </form>
+        </section>
 
-      <section>
-        <h2>Історія записів</h2>
+        <section>
+          <h2>Історія записів</h2>
 
-        <article class="card">
-          <h3><time datetime="2026-09-15">15 вересня 2026</time></h3>
-          <p>Настрій: чудовий</p>
-          <p>Крутий день.</p>
-        </article>
+          <div class="cards">
+            <article class="card">
+              <h3><time datetime="2026-09-15">15 вересня 2026</time></h3>
+              <p>Настрій: чудовий</p>
+              <p>Крутий день.</p>
+            </article>
 
-        <article class="card">
-          <h3><time datetime="2026-09-14">14 вересня 2026</time></h3>
-          <p>Настрій: нейтральний</p>
-          <p>Спокійний день без особливих подій.</p>
-        </article>
+            <article class="card">
+              <h3><time datetime="2026-09-14">14 вересня 2026</time></h3>
+              <p>Настрій: нейтральний</p>
+              <p>Спокійний день без особливих подій.</p>
+            </article>
 
-        <article class="card">
-          <h3><time datetime="2026-09-13">13 вересня 2026</time></h3>
-          <p>Настрій: поганий</p>
-          <p>Багато завдань і мало сну.</p>
-        </article>
-      </section>
-    </main>
+            <article class="card">
+              <h3><time datetime="2026-09-13">13 вересня 2026</time></h3>
+              <p>Настрій: поганий</p>
+              <p>Багато завдань і мало сну.</p>
+            </article>
+          </div>
+        </section>
+      </main>
 
-    <aside>
-      <h2>Короткий підсумок</h2>
-      <p>Усього записів: 3</p>
-      <ul>
-        <li>Чудовий настрій: 1 день</li>
-        <li>Нейтральний настрій: 1 день</li>
-        <li>Поганий настрій: 1 день</li>
-      </ul>
-      <p>Останній запис: <time datetime="2026-09-15">15 вересня 2026</time></p>
-    </aside>
+      <aside>
+        <h2>Короткий підсумок</h2>
+        <p>Усього записів: 3</p>
+        <ul>
+          <li>Чудовий настрій: 1 день</li>
+          <li>Нейтральний настрій: 1 день</li>
+          <li>Поганий настрій: 1 день</li>
+        </ul>
+        <p>Останній запис: <time datetime="2026-09-15">15 вересня 2026</time></p>
+      </aside>
+    </div>
 
     <footer>
       <p>Трекер настрою</p>

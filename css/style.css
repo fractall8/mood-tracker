@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
   margin: 0;
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -24,43 +29,61 @@ body {
   --page: #faf8fd;
 }
 
-header {
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
   background: linear-gradient(
     135deg,
     var(--lavender),
     var(--mint) 55%,
     var(--peach)
   );
-  padding: 32px 24px;
+  padding: 20px 16px;
   border-bottom: 2px solid var(--border);
 }
 
-header h1 {
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  background-color: #ffffff;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+}
+
+.site-header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--ink);
 }
 
 main {
   max-width: 720px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 24px 16px;
 }
 
 main section + section {
-  margin-top: 40px;
+  margin-top: 32px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 .card {
   background-color: var(--mint);
   border-radius: 16px;
   padding: 14px;
-  margin-bottom: 12px;
   box-shadow: 0 2px 6px rgba(74, 63, 107, 0.08);
-}
-
-.card:last-child {
-  margin-bottom: 0;
 }
 
 .card h3 {
@@ -77,9 +100,10 @@ main section + section {
 }
 
 aside {
+  width: calc(100% - 32px);
   max-width: 720px;
-  margin: 0 auto 32px;
-  padding: 20px 24px;
+  margin: 0 auto 24px;
+  padding: 20px;
   background-color: var(--lavender);
   border: 2px solid var(--border);
   border-radius: 16px;
@@ -159,4 +183,64 @@ footer p {
 
 .mood-form button:hover {
   background-color: var(--mint);
+}
+
+@media (min-width: 600px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .site-header {
+    padding: 28px 24px;
+    gap: 16px;
+  }
+
+  .site-header .logo {
+    width: 56px;
+    height: 56px;
+    font-size: 1.75rem;
+  }
+
+  .site-header h1 {
+    font-size: 2rem;
+  }
+
+  main {
+    padding: 32px 24px;
+  }
+
+  main section + section {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    align-items: start;
+  }
+
+  main {
+    max-width: none;
+    padding: 48px 0;
+  }
+
+  main section + section {
+    margin-top: 48px;
+  }
+
+  aside {
+    width: auto;
+    max-width: none;
+    margin: 48px 0 0;
+  }
+
+  .site-header {
+    padding: 36px 40px;
+  }
 }
