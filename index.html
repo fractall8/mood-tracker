@@ -3,16 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito:wght@800&display=swap"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>Трекер настрою</title>
   </head>
   <body>
     <header class="site-header">
-      <span class="logo" aria-hidden="true">🙂</span>
-      <h1>Трекер настрою</h1>
+      <div class="container site-header__inner">
+        <span class="logo" aria-hidden="true">🙂</span>
+        <h1>Трекер настрою</h1>
+      </div>
     </header>
 
-    <div class="layout">
+    <div class="container layout">
       <main>
         <section>
           <h2>Відмітити настрій</h2>
@@ -42,21 +50,21 @@
           <h2>Історія записів</h2>
 
           <div class="cards">
-            <article class="card">
+            <article class="card mood-great">
               <h3><time datetime="2026-09-15">15 вересня 2026</time></h3>
-              <p>Настрій: чудовий</p>
+              <p class="card__mood">Настрій: чудовий</p>
               <p>Крутий день.</p>
             </article>
 
-            <article class="card">
+            <article class="card mood-neutral">
               <h3><time datetime="2026-09-14">14 вересня 2026</time></h3>
-              <p>Настрій: нейтральний</p>
+              <p class="card__mood">Настрій: нейтральний</p>
               <p>Спокійний день без особливих подій.</p>
             </article>
 
-            <article class="card">
+            <article class="card mood-bad">
               <h3><time datetime="2026-09-13">13 вересня 2026</time></h3>
-              <p>Настрій: поганий</p>
+              <p class="card__mood">Настрій: поганий</p>
               <p>Багато завдань і мало сну.</p>
             </article>
           </div>
@@ -66,18 +74,23 @@
       <aside>
         <h2>Короткий підсумок</h2>
         <p>Усього записів: 3</p>
-        <ul>
-          <li>Чудовий настрій: 1 день</li>
-          <li>Нейтральний настрій: 1 день</li>
-          <li>Поганий настрій: 1 день</li>
+        <h3>Шкала настрою</h3>
+        <ul class="mood-scale">
+          <li class="mood-great">Чудовий: 1 день</li>
+          <li class="mood-good">Добрий: 0 днів</li>
+          <li class="mood-neutral">Нейтральний: 1 день</li>
+          <li class="mood-bad">Поганий: 1 день</li>
+          <li class="mood-awful">Жахливий: 0 днів</li>
         </ul>
         <p>Останній запис: <time datetime="2026-09-15">15 вересня 2026</time></p>
       </aside>
     </div>
 
     <footer>
-      <p>Трекер настрою</p>
-      <p>Проєкт для відстеження настрою</p>
+      <div class="container">
+        <p>Трекер настрою</p>
+        <p>Проєкт для відстеження настрою</p>
+      </div>
     </footer>
     <script src="js/app.js"></script>
   </body>
