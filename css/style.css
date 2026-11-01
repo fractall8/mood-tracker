@@ -186,6 +186,16 @@ main section + section {
   resize: vertical;
 }
 
+.mood-form input:has(+ .char-counter) {
+  margin-bottom: var(--space-1);
+}
+
+.char-counter {
+  margin: 0 0 var(--space-5);
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
 .mood-form input:focus,
 .mood-form select:focus,
 .mood-form textarea:focus,

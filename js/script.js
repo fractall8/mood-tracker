@@ -85,6 +85,9 @@ const labelToClass = {
 // і p (нотатка), ставить атрибут data-mood та клас за рівнем настрою,
 // після чого додає картку в контейнер #mood-history
 const renderEntries = (entries) => {
+  // Очищаємо контейнер, щоб повторний виклик не дублював уже намальовані картки
+  listContainer.replaceChildren();
+
   for (const entry of entries) {
     const label = moodToLabel(entry.mood);
 
@@ -129,3 +132,58 @@ const renderSummary = (entries, average) => {
 };
 
 renderSummary(moodEntries, averageMood);
+
+const form = document.querySelector("#mood-form");
+
+// Обробник submit: скасовує перезавантаження сторінки, зчитує поля форми,
+// додає новий запис у moodEntries, перемальовує список і підсумок,
+// після чого очищає форму та скидає лічильник символів
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const date = form.querySelector("#mood-date").value;
+  const mood = Number(form.querySelector("#mood-level").value);
+  const note = form.querySelector("#mood-note").value.trim();
+
+  const newEntry = { date, mood, note };
+
+  moodEntries.push(newEntry);
+
+  console.log("Додано запис:", newEntry);
+  console.log("Усього записів у масиві:", moodEntries.length);
+
+  renderEntries(moodEntries);
+  renderSummary(moodEntries, getAverageMood(moodEntries));
+
+  form.reset();
+  updateNoteCounter();
+});
+
+const moodInput = form.querySelector("#mood-level");
+
+// Обробник input на полі настрою: власна перевірка понад min/max —
+// значення поза 1–5 позначаємо через setCustomValidity, щоб браузер
+// не дав надіслати форму й показав наше повідомлення
+moodInput.addEventListener("input", () => {
+  const value = moodInput.value;
+  const mood = Number(value);
+
+  // Порожнє поле лишаємо стандартній перевірці required
+  if (value !== "" && (mood < 1 || mood > 5)) {
+    moodInput.setCustomValidity("Оцінка настрою має бути від 1 до 5.");
+  } else {
+    moodInput.setCustomValidity("");
+  }
+});
+
+const noteInput = form.querySelector("#mood-note");
+const noteCounter = document.querySelector("#note-counter");
+
+// Оновлює лічильник: скільки символів ще можна ввести до maxlength
+const updateNoteCounter = () => {
+  const remaining = noteInput.maxLength - noteInput.value.length;
+  noteCounter.textContent = `Залишилось символів: ${remaining}`;
+};
+
+// Обробник input на полі коментаря: оновлює лічильник на кожне натискання
+noteInput.addEventListener("input", updateNoteCounter);
