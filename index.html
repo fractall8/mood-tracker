@@ -79,6 +79,16 @@
             </article>
           </div>
         </section>
+
+        <section>
+          <h2>Записи з сервера</h2>
+
+          <button type="button" class="refresh-button" id="api-refresh">Оновити</button>
+          <p class="loader" id="api-loader" hidden>Завантаження записів…</p>
+          <p id="api-status" role="status"></p>
+          <p class="api-error" id="api-error" role="alert" hidden></p>
+          <div class="cards" id="api-entries"></div>
+        </section>
       </main>
 
       <aside>

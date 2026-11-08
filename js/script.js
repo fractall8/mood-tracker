@@ -1,3 +1,7 @@
+// Адреса мок-API: коментарі JSONPlaceholder трактуємо як записи настрою
+// (name — заголовок запису, body — текст нотатки, email — автор)
+const API_URL = "https://jsonplaceholder.typicode.com/comments?postId=1";
+
 console.log("script.js підключено");
 
 // Записи настрою за тиждень: дата у форматі ISO, оцінка від 1 до 5 і текстова нотатка
@@ -84,9 +88,10 @@ const labelToClass = {
 // Рендер історії: на кожен запис масиву створює картку article з h3 (дата)
 // і p (нотатка), ставить атрибут data-mood та клас за рівнем настрою,
 // після чого додає картку в контейнер #mood-history
-const renderEntries = (entries) => {
+// Контейнер можна передати другим аргументом (за замовчуванням — #mood-history)
+const renderEntries = (entries, container = listContainer) => {
   // Очищаємо контейнер, щоб повторний виклик не дублював уже намальовані картки
-  listContainer.replaceChildren();
+  container.replaceChildren();
 
   for (const entry of entries) {
     const label = moodToLabel(entry.mood);
@@ -110,11 +115,21 @@ const renderEntries = (entries) => {
     note.textContent = entry.note;
 
     // Спершу збираємо картку в пам'яті, потім вставляємо її на сторінку
-    card.append(title, note);
-    listContainer.append(card);
+    card.append(title);
+
+    // Автор є лише в записах, отриманих з API
+    if (entry.author) {
+      const author = document.createElement("p");
+      author.classList.add("card__mood");
+      author.textContent = entry.author;
+      card.append(author);
+    }
+
+    card.append(note);
+    container.append(card);
   }
 
-  console.log("Додано карток у контейнер:", listContainer.children.length);
+  console.log("Додано карток у контейнер:", container.children.length);
 };
 
 renderEntries(moodEntries);
@@ -187,3 +202,74 @@ const updateNoteCounter = () => {
 
 // Обробник input на полі коментаря: оновлює лічильник на кожне натискання
 noteInput.addEventListener("input", updateNoteCounter);
+
+// Елементи блоку «Записи з сервера»: список карток, рядок успіху, індикатор
+// завантаження, повідомлення про помилку та кнопка повторного запиту
+const apiContainer = document.querySelector("#api-entries");
+const apiStatus = document.querySelector("#api-status");
+const apiLoader = document.querySelector("#api-loader");
+const apiError = document.querySelector("#api-error");
+const apiRefresh = document.querySelector("#api-refresh");
+
+// Повний цикл запиту: fetch → перевірка статусу → розбір JSON → виведення карток.
+// Якщо мережа недоступна чи сервер відповів помилкою, показуємо повідомлення
+async function loadData() {
+  // Вмикаємо ознаку завантаження ще до запиту
+  apiLoader.hidden = false;
+  apiRefresh.disabled = true;
+  apiContainer.setAttribute("aria-busy", "true");
+  apiStatus.textContent = "";
+  apiError.hidden = true;
+
+  try {
+    // Чекаємо відповідь сервера; мережевий збій тут кидає виняток і веде в catch
+    const response = await fetch(API_URL);
+
+    // fetch не вважає 404/500 помилкою, тож статус перевіряємо самі
+    if (!response.ok) {
+      throw new Error(
+        `Сервер повернув помилку ${response.status} ${response.statusText} для ${API_URL}`
+      );
+    }
+
+    // Розбираємо тіло відповіді з JSON у масив об'єктів
+    const data = await response.json();
+
+    // Перевірка структури: очікуємо масив об'єктів із полями name, body, email
+    console.log("Отримано з API:", data);
+
+    // Зіставляємо поля API з формою записів moodEntries: name — заголовок картки
+    // (на місці дати), body — нотатка, email — автор; оцінки настрою API не має,
+    // тож ставимо нейтральну 3
+    const apiEntries = data.map((item) => ({
+      date: item.name,
+      mood: 3,
+      note: item.body,
+      author: item.email,
+    }));
+
+    // Малюємо картки тією самою функцією, що й власну історію, але в окремий контейнер
+    renderEntries(apiEntries, apiContainer);
+
+    apiStatus.textContent = `Завантажено записів: ${data.length}`;
+  } catch (error) {
+    // Користувачу — зрозуміле повідомлення без технічних деталей
+    apiError.textContent = "Записи тимчасово недоступні. Натисніть «Оновити», щоб спробувати ще раз.";
+    apiError.hidden = false;
+
+    // Розробнику — повний текст винятку й адреса запиту
+    console.error(`Не вдалося завантажити записи з ${API_URL}:`, error);
+  } finally {
+    // Вимикаємо ознаку завантаження незалежно від того, вдався запит чи ні
+    apiLoader.hidden = true;
+    apiRefresh.disabled = false;
+    apiContainer.removeAttribute("aria-busy");
+  }
+}
+
+// Перше завантаження записів одразу після відкриття сторінки
+loadData();
+
+// Обробник click на кнопці «Оновити»: повторює запит без перезавантаження сторінки,
+// щоб після мережевого збою користувач міг спробувати ще раз
+apiRefresh.addEventListener("click", loadData);
